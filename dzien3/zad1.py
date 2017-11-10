@@ -5,6 +5,7 @@
 # rok = input("Podaj rok: ")
 # rok = int(rok)
 
+# zmieniamy stringa (input) na inta
 rok = int(input("Podaj rok: "))
 
 if rok % 400 == 0:

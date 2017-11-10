@@ -1,5 +1,8 @@
+# funkcja input pobiera stringa od usera
 nazwisko = input("Podaj nazwisko:\n ")
-# print(type(nazwisko))
+
+# wszystko co wpisuje użytkownik jest stringiem
+print(type(nazwisko))
 
 # usunąć whitespace'y z początku i końca
 nazwisko = nazwisko.strip()
@@ -8,13 +11,11 @@ nazwisko = nazwisko.strip()
 # i przerwać program
 if not nazwisko.isalpha():
     print("Muszą być tylko litery")
-    break
     exit(99)
 
 # nazwisko = nazwisko.strip()
 # zamienić wszystkie litery na duże
 naz_czyste = nazwisko.upper()
-
 
 print(naz_czyste)
 
@@ -26,7 +27,6 @@ elif naz_czyste.endswith("SKI"):
 
 # elif naz_czyste.isupper():
 #     print("Chyba jesteś złośliwa :/")
-
 
 
 print("Koniec programu")
