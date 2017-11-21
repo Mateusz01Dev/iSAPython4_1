@@ -5,19 +5,26 @@ elementy = { 1:"ola", 0:"ala",  2:"ela" }
 
 slownik = {"imie": "Adam", "nazwisko":"kowalski", "wiek":32}
 
-# print(slownik.keys())
-# print(slownik.values())
-#
-# for klucz, wartosc in slownik.items():
-#     print(f"Klucz: {klucz} ma wartość {wartosc}")
-#
-# if "adres" in slownik.keys():
-#     print("Adres dostępny")
-# else:
-#     print("adres niedostępny")
+# klucze
+print(slownik.keys())
+# wartości
+print(slownik.values())
+
+# items() zwraca parę - klucz oraz wartość
+for klucz, wartosc in slownik.items():
+    print(f"Klucz: {klucz} ma wartość {wartosc}")
+
+if "adres" in slownik.keys():
+    print("Adres dostępny")
+else:
+    print("adres niedostępny")
 
 print(slownik)
+# jeśli przypiszemy wartość do nieistniejącego klucza
+# to zostanie on utworzony
 slownik["adres"] = "Gdańsk"
 print(slownik)
+# jeśli przypisujemy wartość do istniejącego klucza
+# to zmieniamy/nadpisujemy jego wartość
 slownik["adres"] = "Gdynia"
 print(slownik)
