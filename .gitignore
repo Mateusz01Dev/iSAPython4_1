@@ -102,3 +102,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+.idea/
+dzien6/baza.pckl
+dzien7/secrets.py
