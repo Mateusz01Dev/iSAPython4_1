@@ -10,8 +10,15 @@ class Czekolada(object):
     def zjedz(self, ilosc_g):
         if ilosc_g >= self.waga:
             self.waga = self.waga - ilosc_g
+
         else:
             print("Nie ma tyle czekolady")
+
+    def podaj_wage(self):
+        return self.waga
+
+    def podaj_producenta(self):
+        print(self.producent)
 
     def __add__(self, other):
         return self.waga + other.waga
