@@ -1,5 +1,6 @@
 from unittest import TestCase
 from dzien10.czekolada import Czekolada
+from tools.catch_print import *
 
 class CzekoTesty(TestCase):
 
@@ -13,8 +14,8 @@ class CzekoTesty(TestCase):
 
     def test_podaj_producenta(self):
         czekolada = Czekolada("wedel", "mleczna", 150)
-        oczekiwany_prod = "wedel"
+        oczekiwany_prod = "wedel\n"
 
-        rzeczywisty_prod = czekolada.podaj_producenta()
+        rzeczywisty_prod = get_print_output(czekolada.podaj_producenta)
 
         self.assertEqual(rzeczywisty_prod, oczekiwany_prod)

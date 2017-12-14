@@ -7,7 +7,6 @@ class KalkulatorTesty(TestCase):
         self.a = 23
         self.b = 34
 
-
     def test_dodaj(self):
         # arrange
         wynik_oczekiwany = self.a + self.b
