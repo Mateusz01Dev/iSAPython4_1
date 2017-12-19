@@ -13,12 +13,12 @@ sp2 = SmartPicture(url=pic_url)
 sp2.analyze()
 
 # wypiszemy info
-# print("Caption:", sp1.description)
-# print("Num of faces:", len(sp1.faces))
-#
-# for face in sp1.faces:
-#     print(face.gender, face.age)
-#     print(face.rectangle)
+print("Caption:", sp1.description)
+print("Num of faces:", len(sp1.faces))
+
+for face in sp1.faces:
+    print(face.gender, face.age)
+    print(face.rectangle)
 #
 # # test opisywania zdjęcia
 # pd1 = PictureDescriptor(sp1)
