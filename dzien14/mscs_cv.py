@@ -85,16 +85,35 @@ class SmartPicture(object):
 
         api_url = OCR_URL if ocr else API_URL
 
-        # todo wysłać odpowiedni request
+        if self.path is not None:
+            response = self.send_picture(api_url)
+            self.__save_source_picture()
 
-        # todo zapisać jsona do odpowiedniego pola
+        elif self.url is not None:
+            response = self.send_picture_url(api_url)
+            self.__save_source_picture()
 
-        # todo spróbować pobrać wysokość zdjęcia
+        else:
+            print("No proper path or url given, cannot send request")
+            return
+
+        self.pic_info = json.loads(response.text, encoding="utf-8")
+
+        try:
+            self.height = self.pic_info['metadata']['height']
+        except KeyError:
+            pass
 
         self.__save_json_info()
 
         if ocr:
-            self.text = Text(self.pic_info)
+            self.get_ocr_txt()
+
+    def get_ocr_txt(self):
+        self.text = Text(self.pic_info)
+        target_txt = self.pic_target_path + '.txt'
+        with open(target_txt, 'w') as file:
+            file.write(self.text.text)
 
     def send_picture(self, api_url) -> requests.Response:
         """
@@ -102,7 +121,12 @@ class SmartPicture(object):
         :param: api_url: API endpoint.
         :return: Response.
         """
-        #todo wyslac request z plikiem
+        pic_bytes = open(self.path, 'rb').read()
+        response = requests.post(api_url,
+                                 data=pic_bytes,
+                                 headers=self.request_header,
+                                 params=PARAMS)
+        response.raise_for_status()
         return response
 
     def send_picture_url(self, api_url) -> requests.Response:
@@ -111,7 +135,11 @@ class SmartPicture(object):
         :param: api_url: API endpoint.
         :return: Response.
         """
-        #todo wyslac request z urlem
+        response = requests.post(api_url,
+                                 json=self.request_body,
+                                 headers=self.request_header,
+                                 params=PARAMS)
+        response.raise_for_status()
         return response
 
     def __save_json_info(self):
