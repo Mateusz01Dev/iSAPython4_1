@@ -51,16 +51,29 @@ class SmartPicture(object):
 
         self.__prepare_target_path()
 
-        # todo w zależności czy path czy url należy przygotować header i body
+        if self.path is not None and os.path.exists(self.path):
+            self.request_header = HEADER_PIC
+
+        elif self.url is not None:
+            self.request_header = HEADER_URL
+            self.request_body = {'url': f'{self.url}'}
+
+        else:
+            print("No proper path or url provided!")
+            return
 
     def __prepare_target_path(self):
         """
         Creates comman part of target path - {target dir}\{root name}_{id}_
         Target path is being used to save json, source and described picture.
         """
-        #todo przygotować ścieżkę docelową
+        target_dir = os.path.join(os.getcwd(), TARGET_DIR)
 
-        target_dir =
+        if not os.path.exists(target_dir):
+            os.mkdir(target_dir)
+
+        self.pic_target_path = os.path.join(target_dir, ROOT_NAME)
+        self.pic_target_path += str(self.id)
 
     def analyze(self, ocr=False):
         """
