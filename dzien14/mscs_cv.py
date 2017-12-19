@@ -146,11 +146,10 @@ class SmartPicture(object):
         """
         Saves json with received data.
         """
-        # todo przygotować ścieżkę pliku docelowego json
-        full_name =
+        full_name = self.pic_target_path + ".json"
 
-        # todo zapisać json
-
+        with open(full_name, 'w') as file:
+            json.dump(self.pic_info, file, indent=4, ensure_ascii=False)
             print(f"Saved JSON at location: {full_name}")
 
     def __save_source_picture(self):
@@ -190,7 +189,12 @@ class SmartPicture(object):
         """
         Gets recognized description.
         """
-        #todo get caption
+        captions = self.pic_info['description']['captions']
+
+        if len(captions) > 0:
+            return captions[0]['text']
+        else:
+            return "No description"
 
     @property
     def faces(self) -> list:
@@ -198,7 +202,14 @@ class SmartPicture(object):
         Gets list containing Face objects.
         :return: List of faces [Face, ...]
         """
-       #todo get face objects
+
+        if self.__faces is None:
+            self.__faces = []
+            for face_data in self.pic_info['faces']:
+                face = Face(face_data)
+                self.__faces.append(face)
+
+        return self.__faces
 
     @property
     def celebrities(self):
