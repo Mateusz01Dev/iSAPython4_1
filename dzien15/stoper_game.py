@@ -80,22 +80,32 @@ def stop():
     Stops watch, adds attempts' count and score if stopped on even second.
     Sets game into non running state.
     """
-    # todo
-    pass
+    global game_running, score, attempt
+
+    if game_running:
+        timer.stop()
+        if time_val % 10 == 0:
+            score += 1
+        attempt += 1
+    game_running = False
 
 
 # reset
 def reset():
     """Resets game. Clears all counters."""
-    # todo
-    pass
+    timer.stop()
+    global game_running, time_val, score, attempt
+    time_val = 0
+    score = 0
+    attempt = 0
+    game_running = False
 
 
 # define event handler for timer with 0.1 sec interval
 def stoper():
     """Add 1 to time_val every 0.1 sec"""
-    # todo
-    pass
+    global time_val
+    time_val += 1
 
 
 # define handler for drawing time on canvas
